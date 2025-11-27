@@ -1,109 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="den_n.financeaccount.MainController"
-      styleClass="root" spacing="20" prefWidth="800" prefHeight="600">
-
-    <!-- Верхняя панель -->
-    <HBox alignment="CENTER_LEFT" spacing="20" styleClass="header">
-        <ImageView fitWidth="30" fitHeight="30">
-<!--            <Image url="@../images/apple_logo.png" />-->
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1500.0" styleClass="root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="den_n.financeaccount.pages.main.MainController">
+    <HBox alignment="center" styleClass="header">
+        <ImageView fitHeight="50" fitWidth="50">
+            <Image url="@../image/logo.png" />
         </ImageView>
-        <Label text="Tolttech" styleClass="app-title" />
-
-        <HBox HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT">
-            <Button text="New transaction" styleClass="btn-secondary" />
-            <Button styleClass="btn-circle">
-                <graphic>
-                    <ImageView fitWidth="24" fitHeight="24">
-<!--                        <Image url="@../icons/plus_icon.png" />-->
-                    </ImageView>
-                </graphic>
-            </Button>
-        </HBox>
+        <Label styleClass="logo-text">Finance accounting</Label>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button onAction="#newTransactionBtnClick" styleClass="header-btn" text="Новая транзакция">
+         <padding>
+            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+         </padding>
+         <HBox.margin>
+            <Insets left="15.0" right="15.0" />
+         </HBox.margin></Button>
+    </HBox>
+    <HBox styleClass="myAccountsTitle">
+        <Label styleClass="myAccountsLabel" text="Total Balance">
+         <HBox.margin>
+            <Insets bottom="20.0" left="50.0" />
+         </HBox.margin></Label>
+    </HBox>
+    <HBox alignment="CENTER_RIGHT" styleClass="account-HBox" VBox.vgrow="ALWAYS">
+        <ListView fx:id="accountListView" prefWidth="1000.0" styleClass="account-List">
+         <HBox.margin>
+            <Insets right="50.0" />
+         </HBox.margin></ListView>
     </HBox>
 
-    <!-- Заголовок -->
-    <VBox spacing="5">
-        <Label text="Total Balance" styleClass="title" />
-        <Label text="aggregated account Funds" styleClass="subtitle" />
-    </VBox>
-
-    <!-- Список карточек -->
-    <VBox id="accountList" spacing="15" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-        <!-- Карточка 1 -->
-        <HBox styleClass="card" style="-fx-background-color: linear-gradient(to right, #00d4ff, #3a2c5e);">
-            <VBox spacing="5" HBox.hgrow="ALWAYS">
-                <Label text="Savings" styleClass="card-label" />
-                <Label text="1,250" styleClass="card-amount" />
-            </VBox>
-            <HBox alignment="CENTER_RIGHT" spacing="10" HBox.hgrow="NEVER">
-                <Label text="+ $1,250 income / $870" styleClass="card-info" />
-                <Button text="Monthly →" styleClass="btn-small" />
-            </HBox>
-        </HBox>
-
-        <!-- Карточка 2 -->
-        <HBox styleClass="card" style="-fx-background-color: linear-gradient(to right, #00b3cc, #3a2c5e);">
-            <VBox spacing="5" HBox.hgrow="ALWAYS">
-                <Label text="Credit Card" styleClass="card-label" />
-                <Label text="1,705" styleClass="card-amount" />
-            </VBox>
-            <HBox alignment="CENTER_RIGHT" spacing="10" HBox.hgrow="NEVER">
-                <Label text="+ $1,250 income / $870" styleClass="card-info" />
-                <Button text="Monthly →" styleClass="btn-small" />
-            </HBox>
-        </HBox>
-
-        <!-- Карточка 3 -->
-        <HBox styleClass="card" style="-fx-background-color: linear-gradient(to right, #ff7766, #9a5ebd);">
-            <VBox spacing="5" HBox.hgrow="ALWAYS">
-                <Label text="Credit Card" styleClass="card-label" />
-                <Label text="1,250" styleClass="card-amount" />
-            </VBox>
-            <HBox alignment="CENTER_RIGHT" spacing="10" HBox.hgrow="NEVER">
-                <Label text="+ $1,250 income / $870" styleClass="card-info" />
-                <Button text="Monthly →" styleClass="btn-small" />
-            </HBox>
-        </HBox>
-    </VBox>
-
-    <!-- Нижняя панель -->
-    <HBox styleClass="footer" spacing="20" alignment="CENTER">
-        <Button styleClass="btn-footer">
+    <!-- footer -->
+    <HBox alignment="CENTER_LEFT" spacing="20" styleClass="footer-panel">
+        <!-- Кнопки слева -->
+        <Button onAction="#addAccountClick" styleClass="footer-btn">
             <graphic>
-                <ImageView fitWidth="20" fitHeight="20">
-<!--                    <Image url="@../icons/plus_icon.png" />-->
+                <ImageView fitHeight="35" fitWidth="35">
+                    <Image url="@../image/plus.png" />
                 </ImageView>
             </graphic>
             <text>Add Account</text>
         </Button>
-        <Label text="|"></Label>
-        <Button styleClass="btn-footer">
+
+        <Label styleClass="divider" text="|" />
+
+        <Button onAction="#addCategoryClick" styleClass="footer-btn">
             <graphic>
-                <ImageView fitWidth="20" fitHeight="20">
-<!--                    <Image url="@../icons/arrow_right.png" />-->
+                <ImageView fitHeight="35" fitWidth="35">
+                    <Image url="@../image/plus.png" />
                 </ImageView>
             </graphic>
             <text>Add Category</text>
         </Button>
-        <HBox HBox.hgrow="ALWAYS" />
-        <Button styleClass="btn-footer-icon-only">
+
+        <Region HBox.hgrow="ALWAYS" />
+
+        <!-- Кнопка справа -->
+        <Button onAction="#reloadClick" styleClass="footer-icon-btn">
             <graphic>
-                <ImageView fitWidth="20" fitHeight="20">
-<!--                    <Image url="@../icons/arrow_right.png" />-->
+                <ImageView fitHeight="35" fitWidth="35">
+                    <Image url="@../image/reload.png" />
                 </ImageView>
             </graphic>
         </Button>
+      <VBox.margin>
+         <Insets bottom="15.0" left="25.0" right="25.0" top="10.0" />
+      </VBox.margin>
     </HBox>
 
 </VBox>

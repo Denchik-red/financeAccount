@@ -1,0 +1,80 @@
+package den_n.financeaccount.pages.main;
+
+import den_n.financeaccount.module.Account;
+import javafx.geometry.Insets;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Priority;
+
+import java.math.BigDecimal;
+
+public class AccountListCell extends ListCell<Account> {
+
+    private final HBox card;
+    private final VBox leftBox;
+    private final Label nameLabel;
+    private final Label balanceLabel;
+    private final Button monthlyButton;
+
+    public AccountListCell() {
+        nameLabel = new Label();
+        nameLabel.getStyleClass().add("card-label");
+
+        balanceLabel = new Label();
+        balanceLabel.getStyleClass().add("card-amount");
+
+        leftBox = new VBox(5, nameLabel, balanceLabel);
+        leftBox.setPadding(new Insets(15, 0, 15, 15));
+        leftBox.getStyleClass().add("left-box");
+
+        monthlyButton = new Button("Monthly →");
+        monthlyButton.getStyleClass().add("btn-small");
+
+        HBox rightBox = new HBox(monthlyButton);
+        rightBox.setPadding(new Insets(15, 15, 15, 0));
+        rightBox.getStyleClass().add("right-box");
+
+        card = new HBox(leftBox, rightBox);
+        card.getStyleClass().add("card");
+        HBox.setHgrow(leftBox, Priority.ALWAYS); // левая часть растягивается
+
+        monthlyButton.setOnAction(e -> {
+            Account account = getItem();
+            if (account != null) {
+                System.out.println("Monthly clicked for: " + account.getName());
+            }
+        });
+    }
+
+    @Override
+    protected void updateItem(Account account, boolean empty) {
+        super.updateItem(account, empty);
+
+        if (empty || account == null) {
+            setGraphic(null);
+        } else {
+
+            nameLabel.setText(account.getName());
+            balanceLabel.setText(formatBalance(account.getBalance()));
+
+            // 🔸 Опционально: задаём градиент в зависимости от типа счёта
+            if ((account.getBalance().compareTo(BigDecimal.valueOf(100.0))) < 0) {
+                card.getStyleClass().add("credit");
+            } else if ((account.getBalance().compareTo(BigDecimal.valueOf(1000.0))) < 0) {
+                card.getStyleClass().add("investment");
+            } else {
+                card.getStyleClass().add("savings");
+            }
+
+            setGraphic(card);
+        }
+    }
+
+    private String formatBalance(BigDecimal balance) {
+        if (balance == null) return "$0.00";
+        return "$" + balance.stripTrailingZeros().toPlainString();
+    }
+}

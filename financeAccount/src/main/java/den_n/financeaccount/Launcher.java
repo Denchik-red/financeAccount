@@ -1,5 +1,6 @@
 package den_n.financeaccount;
 
+import den_n.financeaccount.pages.main.MainApplication;
 import javafx.application.Application;
 
 public class Launcher {

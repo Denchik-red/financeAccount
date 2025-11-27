@@ -10,7 +10,7 @@
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="den_n.financeaccount.MainController"
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="den_n.financeaccount.pages.main.MainController"
       styleClass="root" spacing="20" prefWidth="800" prefHeight="600">
 
     <!-- Верхняя панель -->
