@@ -47,4 +47,15 @@ public class DAO<T> {
             throw new RuntimeException("Failed to get entities", e);
         }
     }
+
+    public void delete(T entity) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        if (entity != null) {
+            session.delete(entity);
+        }
+        transaction.commit();
+        session.close();
+    }
 }

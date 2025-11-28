@@ -17,18 +17,15 @@
         </ImageView>
         <Label styleClass="logo-text">Finance accounting</Label>
         <Region HBox.hgrow="ALWAYS" />
-        <Button onAction="#newTransactionBtnClick" styleClass="header-btn" text="Новая транзакция">
-         <padding>
-            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
-         </padding>
+        <Button onAction="#newTransactionBtnClick" styleClass="header-btn" text="New Transaction">
          <HBox.margin>
             <Insets left="15.0" right="15.0" />
          </HBox.margin></Button>
     </HBox>
-    <HBox styleClass="myAccountsTitle">
+    <HBox alignment="TOP_LEFT" styleClass="myAccountsTitle">
         <Label styleClass="myAccountsLabel" text="Total Balance">
          <HBox.margin>
-            <Insets bottom="20.0" left="50.0" />
+            <Insets bottom="10.0" left="50.0" top="20.0"/>
          </HBox.margin></Label>
     </HBox>
     <HBox alignment="CENTER_RIGHT" styleClass="account-HBox" VBox.vgrow="ALWAYS">
@@ -58,7 +55,7 @@
                     <Image url="@../image/plus.png" />
                 </ImageView>
             </graphic>
-            <text>Add Category</text>
+            <text>Categories</text>
         </Button>
 
         <Region HBox.hgrow="ALWAYS" />

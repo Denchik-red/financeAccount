@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox styleClass="root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="den_n.financeaccount.pages.AddCategory.AddCategoryController">
+    <ListView fx:id="categoryListView">
+      <VBox.margin>
+         <Insets bottom="30.0" left="20.0" right="20.0" top="20.0" />
+      </VBox.margin></ListView>
+    <HBox>
+        <Button onAction="#addCategoryClick" styleClass="add-category-btn">
+            <graphic>
+                <ImageView fitHeight="35" fitWidth="35">
+                    <Image url="@../image/plus_green.png" />
+                </ImageView>
+            </graphic>
+            <text>New category</text>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+        </Button>
+
+        <Region HBox.hgrow="ALWAYS" />
+
+        <Button onAction="#closeClick" styleClass="close-btn">
+            <graphic>
+                <ImageView fitHeight="35" fitWidth="35">
+                    <Image url="@../image/close_red.png" />
+                </ImageView>
+            </graphic>
+            <text>Close</text>
+         <padding>
+            <Insets bottom="2.0" left="25.0" right="25.0" top="5.0" />
+         </padding>
+        </Button>
+      <padding>
+         <Insets bottom="20.0" left="30.0" right="30.0" />
+      </padding>
+    </HBox>
+</VBox>

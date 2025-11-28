@@ -1,0 +1,127 @@
+.root {
+    -fx-background-image: url("../image/background.png");
+    -fx-background-color: #040411;
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-font-family: "Roboto";
+}
+
+/*
+* {
+    -fx-border-color: red !important;
+    -fx-border-width: 1px !important;
+}
+*/
+
+
+/* Убираем ВЕРТИКАЛЬНЫЙ scrollbar у ListView */
+.list-view .scroll-bar:vertical {
+    -fx-pref-width: 0;
+    -fx-opacity: 0;
+}
+
+/* Убираем ГОРИЗОНТАЛЬНЫЙ scrollbar (если есть) */
+.list-view .scroll-bar:horizontal {
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}
+
+.list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.add-category-btn {
+    -fx-background-color: rgba(64,192,86, 0.1);
+    -fx-text-fill: rgba(64,192,86, 0.9);
+    -fx-background-radius: 21px;
+    -fx-border-width: 2px;
+    -fx-border-color: rgba(64,192,86, 0.3);
+    -fx-border-radius: 21px;
+    -fx-cursor: hand;
+    -fx-font-size: 18px;
+}
+.add-category-btn:hover {
+    -fx-effect: dropshadow(gaussian, rgba(64,192,86, 0.3), 40, 0.3, 0, 0);
+}
+.add-category-btn:pressed {
+    -fx-scale-x: 95%;
+    -fx-scale-y: 95%;
+}
+
+
+.close-btn {
+    -fx-background-color: rgba(252, 80, 80, 0.1);
+    -fx-text-fill: rgba(252, 80, 80, 0.9);
+    -fx-background-radius: 21px;
+    -fx-border-width: 2px;
+    -fx-border-color: rgba(252, 80, 80, 0.3);
+    -fx-border-radius: 21px;
+    -fx-cursor: hand;
+    -fx-font-size: 18px;
+}
+.close-btn:hover {
+    -fx-effect: dropshadow(gaussian, rgba(252, 80, 80, 0.3), 40, 0.3, 0, 0);
+}
+.close-btn:pressed {
+    -fx-scale-x: 95%;
+    -fx-scale-y: 95%;
+}
+
+
+.category_card {
+    -fx-background-color: linear-gradient(
+        to right,
+        rgba(40, 40, 50, 0.8),
+        rgba(40, 55, 70, 0.4)
+    );
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.3, 0, 3);
+    -fx-padding: 0px;
+    -fx-margin: 5px 0px;
+}
+
+.category_card-label {
+    -fx-text-fill: rgba(255, 255, 255, 0.8);
+    -fx-font-size: 18px;
+    -fx-font-weight: 600;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-padding: 3px 20px;
+
+}
+
+.category_card:hover {
+    -fx-background-color: linear-gradient(
+        to right,
+        rgba(40, 50, 65, 0.9),
+        rgba(50, 65, 85, 0.7)
+    );
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 12, 0.4, 0, 4);
+}
+
+.category-delete-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+.category-delete-btn:hover {
+    -fx-effect: dropshadow(gaussian, rgb(255, 0, 0), 40, 0.8, 0, 0);
+}
+
+.category-delete-btn:pressed {
+    -fx-scale-x: 80%;
+    -fx-scale-y: 80%;
+}
