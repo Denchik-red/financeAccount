@@ -1,0 +1,92 @@
+.modal-background {
+    -fx-background-image: url("../image/background.png");
+    -fx-background-color: #040411;
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-font-family: "Roboto";
+}
+
+.modal-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, #00ffff, 5, 0, 0, 0);
+    -fx-alignment: center;
+}
+
+.form-label {
+    -fx-text-fill: #cccccc;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+}
+
+.form-input {
+    -fx-background-color: #1e1e2a;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #888888;
+    -fx-border-color: #2d2d3a;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 15px;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.1), 5, 0, 0, 0);
+}
+
+.form-input:focused {
+    -fx-border-color: #00ffff;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, #00ffff, 8, 0, 0, 0);
+}
+
+.primary-button {
+    -fx-background-color: linear-gradient(to right, #00ffaa, #00ccff);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-padding: 12px 24px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, #00ffff, 8, 0, 0, 0);
+    -fx-cursor: hand;
+}
+
+.primary-button:hover {
+    -fx-background-color: linear-gradient(to right, #00ff99, #00bbff);
+    -fx-effect: dropshadow(gaussian, #00ffff, 12, 0, 0, 0);
+}
+
+.secondary-button {
+    -fx-background-color: #2a2a3a;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-padding: 12px 24px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, #ffffff, 5, 0, 0, 0);
+    -fx-cursor: hand;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #333344;
+    -fx-effect: dropshadow(gaussian, #ffffff, 8, 0, 0, 0);
+}
+
+.form-input .combo-box-popup .list-view {
+    -fx-background-color: #1e1e2a;
+    -fx-text-fill: white;
+}
+
+.form-input .combo-box-popup .list-view .list-cell {
+    -fx-background-color: #1e1e2a;
+    -fx-text-fill: white;
+    -fx-padding: 8px 15px;
+}
+
+.form-input .combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #2d2d3a;
+}
+
+.form-input .text {
+    -fx-fill: #ffffff;
+}

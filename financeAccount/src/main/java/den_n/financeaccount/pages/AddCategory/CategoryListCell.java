@@ -1,5 +1,6 @@
 package den_n.financeaccount.pages.AddCategory;
 
+import den_n.financeaccount.Alert;
 import den_n.financeaccount.DAO;
 import den_n.financeaccount.module.Category;
 import javafx.geometry.Pos;
@@ -11,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.math.BigDecimal;
 
@@ -47,9 +49,14 @@ public class CategoryListCell extends ListCell<Category> {
 
         deleteButton.setOnAction(e -> {
             Category category = getItem();
-            if (category != null) {
-                categoryDAO.delete(category);
-                addCategoryController.loadCategories();
+            if (category != null && Alert.ConfirmAlert("delete category: " + category.getName())) {
+                try {
+                    categoryDAO.delete(category);
+                    addCategoryController.loadCategories();
+                } catch (ConstraintViolationException err) {
+                    System.out.println("This category is specified in the transaction");
+                    Alert.InfoAlert("This category is specified in the transaction");
+                }
             }
         });
     }

@@ -1,6 +1,8 @@
 package den_n.financeaccount.pages.main;
 
+import den_n.financeaccount.DAO;
 import den_n.financeaccount.module.Account;
+import den_n.financeaccount.module.Transaction;
 import javafx.geometry.Insets;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.Button;
@@ -8,8 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Priority;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 public class AccountListCell extends ListCell<Account> {
 
@@ -18,6 +23,8 @@ public class AccountListCell extends ListCell<Account> {
     private final Label nameLabel;
     private final Label balanceLabel;
     private final Button monthlyButton;
+
+    private SessionFactory sessionFactory;
 
     public AccountListCell() {
         nameLabel = new Label();
@@ -58,12 +65,14 @@ public class AccountListCell extends ListCell<Account> {
         } else {
 
             nameLabel.setText(account.getName());
-            balanceLabel.setText(formatBalance(account.getBalance()));
+            BigDecimal balance = getBalanceForAccount(account);
+            System.out.println(balance);
+            balanceLabel.setText(balance.toString());
 
             // 🔸 Опционально: задаём градиент в зависимости от типа счёта
-            if ((account.getBalance().compareTo(BigDecimal.valueOf(100.0))) < 0) {
+            if ((balance.compareTo(BigDecimal.valueOf(100.0))) < 0) {
                 card.getStyleClass().add("credit");
-            } else if ((account.getBalance().compareTo(BigDecimal.valueOf(1000.0))) < 0) {
+            } else if ((balance.compareTo(BigDecimal.valueOf(1000.0))) < 0) {
                 card.getStyleClass().add("investment");
             } else {
                 card.getStyleClass().add("savings");
@@ -73,8 +82,23 @@ public class AccountListCell extends ListCell<Account> {
         }
     }
 
-    private String formatBalance(BigDecimal balance) {
-        if (balance == null) return "$0.00";
-        return "$" + balance.stripTrailingZeros().toPlainString();
+    public BigDecimal getBalanceForAccount(Account account) {
+        try (Session session = sessionFactory.openSession()) {
+
+            BigDecimal sum = session.createQuery(
+                            "SELECT SUM(t.amount) FROM Transaction t WHERE t.account.id = :accountId",
+                            BigDecimal.class
+                    )
+                    .setParameter("accountId", account.getId())
+                    .uniqueResult();
+
+            return sum != null ? sum : BigDecimal.ZERO;
+        }  catch (Exception e) {
+            throw new RuntimeException("Failed to get entities", e);
+        }
+    }
+
+    public void putProperties(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 }

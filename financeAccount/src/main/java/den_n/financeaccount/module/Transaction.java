@@ -28,11 +28,12 @@ public class Transaction {
 
     public Transaction() {}
 
-    public Transaction(Account account, Category category, BigDecimal amount) {
+    public Transaction(Account account, Category category, BigDecimal amount, LocalDateTime date) {
         this.account = account;
         this.category = category;
         this.amount = amount;
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = date;
+//                LocalDateTime.now();
     }
 
     @PrePersist

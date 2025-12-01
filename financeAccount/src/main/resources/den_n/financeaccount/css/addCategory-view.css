@@ -125,3 +125,10 @@
     -fx-scale-x: 80%;
     -fx-scale-y: 80%;
 }
+
+.title-label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 32px;
+    -fx-effect: dropshadow(gaussian, #34dbce, 40, 0.3, 0, 0);
+    -fx-font-weight: bold;
+}

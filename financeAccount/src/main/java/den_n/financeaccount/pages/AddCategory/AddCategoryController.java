@@ -23,10 +23,12 @@ public class AddCategoryController {
     ObservableList<Category> categoryObservableList;
 
     private SessionFactory sessionFactory;
+    private Stage addCategoryDialogStage;
     private DAO<Category> categoryDAO;
 
-    public void putProperties(SessionFactory sessionFactory) {
+    public void putProperties(SessionFactory sessionFactory, Stage addCategoryDialogStage) {
         this.sessionFactory = sessionFactory;
+        this.addCategoryDialogStage = addCategoryDialogStage;
 
          categoryDAO = new DAO<>(sessionFactory, Category.class);
 
@@ -40,6 +42,7 @@ public class AddCategoryController {
     }
 
     public void addCategoryClick(ActionEvent actionEvent) throws IOException {
+        addCategoryDialogStage.show();
     }
 
     public void closeClick(ActionEvent actionEvent) {
