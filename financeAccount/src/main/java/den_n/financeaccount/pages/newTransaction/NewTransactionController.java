@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import org.hibernate.SessionFactory;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -83,9 +84,22 @@ public class NewTransactionController {
             Stage stage = (Stage) node.getScene().getWindow();
             stage.close();
 
+        } catch (IllegalStateException e) {
+            Alert.ErrorAlert("Error", "The transaction may not be in the future");
+
         } catch (Exception e) {
-            Alert.ErrorAlert("Error", "fill in the form");
+            Alert.ErrorAlert("Error", "Enter the correct information");
         }
+    }
+
+    private SQLException findSQLException(Throwable throwable) {
+        while (throwable != null) {
+            if (throwable instanceof SQLException) {
+                return (SQLException) throwable;
+            }
+            throwable = throwable.getCause();
+        }
+        return null;
     }
 
     @FXML

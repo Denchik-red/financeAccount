@@ -56,33 +56,77 @@ public class MainApplication extends Application {
         }
 
         try(Session session = sessionFactory.openSession()) {
-            String createFunctionSql = """
-        CREATE OR REPLACE FUNCTION getTransactionsMonthly(
-            p_account_name VARCHAR,
-            p_start_date DATE,
-            p_end_date DATE
-        )
-        RETURNS TABLE (
-            date DATE,
-            amount NUMERIC(19, 2)
-        ) AS $$
-        BEGIN
-            RETURN QUERY
-            SELECT 
-                CAST(t.created_at AS DATE),
-                SUM(t.amount)
-            FROM transactions t
-            JOIN accounts a ON t.account_id = a.id
-            WHERE a.name = p_account_name
-              AND CAST(t.created_at AS DATE) BETWEEN p_start_date AND p_end_date
-            GROUP BY CAST(t.created_at AS DATE)
-            ORDER BY CAST(t.created_at AS DATE);
-        END;
-        $$ LANGUAGE plpgsql;
-        """;
             Transaction transaction = session.beginTransaction();
+
+            Long count = session.createQuery("SELECT COUNT(c) FROM Category c", Long.class).uniqueResult();
+            boolean categoriesExist = count != null && count > 0;
+
+
+            String standardCategoriesInsert = """
+                    INSERT INTO categories (name) VALUES
+                    ('Продукты'),
+                    ('Транспорт'),
+                    ('Жильё (аренда, ипотека)'),
+                    ('Коммунальные услуги'),
+                    ('Рестораны и кафе'),
+                    ('Развлечения'),
+                    ('Одежда и обувь'),
+                    ('Здоровье и медицина'),
+                    ('Образование'),
+                    ('Переводы'),
+                    ('Зарплата'),
+                    ('Прочие доходы'),
+                    ('Прочие расходы');""";
+
+            String createTrigger = """
+                    CREATE OR REPLACE FUNCTION validate_transaction_amount()
+                    RETURNS TRIGGER AS $$
+                    BEGIN
+                        IF NEW.created_at > LOCALTIMESTAMP THEN
+                            RAISE EXCEPTION 'Transaction may not be in the future' USING ERRCODE = '22000';
+                        END IF;
+                        RETURN NEW;
+                    END;
+                    $$ LANGUAGE plpgsql;
+                    DROP TRIGGER IF EXISTS validate_transaction_amount_trigger ON transactions;
+                    CREATE TRIGGER validate_transaction_amount_trigger
+                        BEFORE INSERT OR UPDATE ON transactions
+                        FOR EACH ROW EXECUTE FUNCTION validate_transaction_amount();
+                """;
+
+            String createFunctionSql = """
+                CREATE OR REPLACE FUNCTION getTransactionsMonthly(
+                    p_account_name VARCHAR,
+                    p_start_date DATE,
+                    p_end_date DATE
+                )
+                RETURNS TABLE (
+                    date DATE,
+                    amount NUMERIC(19, 2)
+                ) AS $$
+                BEGIN
+                    RETURN QUERY
+                    SELECT 
+                        CAST(t.created_at AS DATE),
+                        SUM(t.amount)
+                    FROM transactions t
+                    JOIN accounts a ON t.account_id = a.id
+                    WHERE a.name = p_account_name
+                      AND CAST(t.created_at AS DATE) BETWEEN p_start_date AND p_end_date
+                    GROUP BY CAST(t.created_at AS DATE)
+                    ORDER BY CAST(t.created_at AS DATE);
+                END;
+                $$ LANGUAGE plpgsql;
+            """;
             session.createNativeQuery(createFunctionSql).executeUpdate();
+
+            session.createNativeQuery(createTrigger).executeUpdate();
+
+            if (!categoriesExist) {
+                session.createNativeQuery(standardCategoriesInsert).executeUpdate();
+            }
             transaction.commit();
+
         } catch (Exception e) {
             System.out.println("init database structure failed: " + e.getMessage());
             Alert.ErrorAlert("Init database structure failed", e.getMessage());
@@ -100,8 +144,9 @@ public class MainApplication extends Application {
         stage.setTitle("Hello!");
         stage.setScene(main_scene);
         stage.setOnCloseRequest(evt -> {
-            if (Alert.ConfirmAlert("Close app")) {
-                stage.close();
+            boolean confirmClose = Alert.ConfirmAlert("Close app");
+            if (!confirmClose) {
+                evt.consume();
             }
         });
         stage.show();

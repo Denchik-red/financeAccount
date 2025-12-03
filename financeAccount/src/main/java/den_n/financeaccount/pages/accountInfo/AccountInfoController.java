@@ -57,11 +57,11 @@ public class AccountInfoController {
     }
 
     public void load() {
-        accountNameLabel.setText("Счёт: " + account.getName());
+        accountNameLabel.setText("Account: " + account.getName());
 
 
         BigDecimal balance = getBalanceForAccount(account);
-        balanceLabel.setText("Баланс: " + balance.toString());
+        balanceLabel.setText("Amount: " + balance.toString());
 
         transactionsListView.setCellFactory(param -> new TransactionInfoListCell());
         // Загрузите транзакции из сервиса/DAO и установите в список
@@ -89,7 +89,7 @@ public class AccountInfoController {
         List<Object[]> transactionByDays = callGetTransactionsMonthly(sessionFactory, account.getName(), start, now);
 
         XYChart.Series<String, BigDecimal> series = new XYChart.Series<>();
-        series.setName("Расходы за день");
+        series.setName("Expenses per day");
 
         transactionByDays.forEach(param -> {
             System.out.println(param[0] + " : " + param[1]);
@@ -150,7 +150,7 @@ public class AccountInfoController {
             RenameAccountDialogController renameAccountDialogController = fxmlLoader.getController();
             content.getStylesheets().add(getClass().getResource("/den_n/financeaccount/css/addAccount-view.css").toExternalForm());
             renameAccountDialogStage = new Stage();
-            renameAccountDialogStage.setTitle("Новая категория");
+            renameAccountDialogStage.setTitle("new category");
             renameAccountDialogStage.setMinWidth(600);
             renameAccountDialogStage.setMinHeight(300);
             renameAccountDialogStage.setScene(content);
