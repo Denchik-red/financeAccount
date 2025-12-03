@@ -1,0 +1,102 @@
+.background {
+    -fx-background-color: #040411;
+    -fx-padding: 30px;
+    -fx-background-insets: 0;
+    -fx-font-family: "Roboto";
+}
+
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, #00ffff, 5, 0, 0, 0);
+    -fx-alignment: center;
+}
+
+.form-label {
+    -fx-text-fill: #cccccc;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+}
+
+.form-input {
+    -fx-background-color: #1e1e2a;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #888888;
+    -fx-border-color: #2d2d3a;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 15px;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.1), 5, 0, 0, 0);
+}
+
+.form-input:focused {
+    -fx-border-color: #00ffff;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, #00ffff, 8, 0, 0, 0);
+}
+
+
+.test-btn {
+    -fx-background-color: rgba(80, 80, 192, 0.1);
+    -fx-text-fill: rgba(80, 80, 192, 0.9);
+    -fx-border-color: rgba(80, 80, 192, 0.3);
+    -fx-background-radius: 21px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 21px;
+    -fx-cursor: hand;
+    -fx-font-size: 16px;
+    -fx-font-family: "Roboto", "Segoe UI", sans-serif;
+    -fx-padding: 8 20;
+    -fx-margin: 0 10;
+}
+.test-btn:hover {
+    -fx-effect: dropshadow(gaussian, rgba(80, 80, 192, 0.3), 40, 0.3, 0, 0);
+}
+.test-btn:pressed {
+    -fx-scale-x: 95%;
+    -fx-scale-y: 95%;
+}
+
+.save-btn {
+    -fx-background-color: rgba(64, 192, 86, 0.1);
+    -fx-text-fill: rgba(64, 192, 86, 0.9);
+    -fx-border-color: rgba(64, 192, 86, 0.3);
+    -fx-background-radius: 21px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 21px;
+    -fx-cursor: hand;
+    -fx-font-size: 16px;
+    -fx-font-family: "Roboto", "Segoe UI", sans-serif;
+    -fx-padding: 8 20;
+    -fx-margin: 0 10;
+}
+.save-btn:hover {
+    -fx-effect: dropshadow(gaussian, rgba(64, 192, 86, 0.3), 40, 0.3, 0, 0);
+}
+.save-btn:pressed {
+    -fx-scale-x: 95%;
+    -fx-scale-y: 95%;
+}
+
+.close-btn {
+    -fx-background-color: rgba(252, 80, 80, 0.1);
+    -fx-text-fill: rgba(252, 80, 80, 0.9);
+    -fx-border-color: rgba(252, 80, 80, 0.3);
+    -fx-background-radius: 21px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 21px;
+    -fx-cursor: hand;
+    -fx-font-size: 16px;
+    -fx-font-family: "Roboto", "Segoe UI", sans-serif;
+    -fx-padding: 8 20;
+    -fx-margin: 0 10;
+}
+.close-btn:hover {
+    -fx-effect: dropshadow(gaussian, rgba(252, 80, 80, 0.3), 40, 0.3, 0, 0);
+}
+.close-btn:pressed {
+    -fx-scale-x: 95%;
+    -fx-scale-y: 95%;
+}

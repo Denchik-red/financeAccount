@@ -1,6 +1,6 @@
 .modal-background {
     -fx-background-image: url("../image/background.png");
-    -fx-background-color: #040411;
+    -fx-background-color: #12121a;
     -fx-background-size: 100% 100%;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
@@ -17,7 +17,7 @@
 
 .form-label {
     -fx-text-fill: #cccccc;
-    -fx-font-size: 14px;
+    -fx-font-size: 18px;
     -fx-font-weight: 500;
 }
 
@@ -33,6 +33,103 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.1), 5, 0, 0, 0);
 }
 
+/* Стиль самого DatePicker-контейнера */
+.date-picker {
+    -fx-background-color: transparent;
+    -fx-border-color: #2d2d3a;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 0;
+}
+
+.date-picker > .text-field {
+    -fx-background-color: #1e1e2a;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #888888;
+    -fx-border-color: transparent;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 15px;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.1), 5, 0, 0, 0);
+}
+
+.date-picker:focused > .text-field {
+    -fx-border-color: #00ffff;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, #00ffff, 8, 0, 0, 0);
+}
+
+/* Стрелка открытия календаря */
+.date-picker > .arrow-button {
+    -fx-background-color: transparent;
+    /*-fx-padding: 0 20 0 20;*/
+    -fx-cursor: hand;
+}
+
+.date-picker > .arrow-button .arrow {
+    -fx-background-color: #cccccc;
+}
+
+.date-picker:focused > .arrow-button .arrow {
+    -fx-background-color: #00ffff;
+}
+
+/* Всплывающее окно календаря */
+.date-picker-popup {
+    -fx-background-color: #1e1e2a;
+    -fx-border-color: #2d2d3a;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
+}
+
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #2d2d3a;
+}
+
+.date-picker-popup .month-year-pane .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.date-picker-popup .calendar-grid {
+    -fx-background-color: #1e1e2a;
+}
+
+.date-picker-popup .calendar-grid .cell {
+    -fx-text-fill: #cccccc;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 5px;
+    -fx-alignment: CENTER;
+}
+
+.date-picker-popup .calendar-grid .cell:filled:hover {
+    -fx-background-color: #2d2d3a;
+    -fx-text-fill: white;
+}
+
+.date-picker-popup .calendar-grid .cell:selected {
+    -fx-background-color: #00ffaa;
+    -fx-text-fill: black;
+}
+
+.date-picker-popup .calendar-grid .today {
+    -fx-background-color: rgba(0, 255, 255, 0.2);
+    -fx-text-fill: white;
+}
+
+.date-picker-popup .calendar-grid .today:selected {
+    -fx-background-color: #00ffff;
+    -fx-text-fill: black;
+}
+
+.date-picker-popup .previous-month,
+.date-picker-popup .next-month {
+    -fx-text-fill: #666666;
+}
+
 .form-input:focused {
     -fx-border-color: #00ffff;
     -fx-border-width: 2px;
@@ -40,36 +137,44 @@
 }
 
 .primary-button {
-    -fx-background-color: linear-gradient(to right, #00ffaa, #00ccff);
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-font-size: 16px;
-    -fx-padding: 12px 24px;
-    -fx-border-radius: 12px;
-    -fx-background-radius: 12px;
-    -fx-effect: dropshadow(gaussian, #00ffff, 8, 0, 0, 0);
+    -fx-background-color: rgba(64, 192, 86, 0.3);
+    -fx-text-fill: rgba(64, 192, 86, 1);
+    -fx-background-radius: 21px;
+    -fx-border-width: 2px;
+    -fx-border-color: rgba(64, 192, 86, 0.5);
+    -fx-border-radius: 21px;
     -fx-cursor: hand;
+    -fx-font-size: 16px;
+    -fx-font-family: "Roboto", "Segoe UI", sans-serif;
+    -fx-font-size: 16px;
+    -fx-padding: 8 20;
 }
 
 .primary-button:hover {
-    -fx-background-color: linear-gradient(to right, #00ff99, #00bbff);
-    -fx-effect: dropshadow(gaussian, #00ffff, 12, 0, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(64, 192, 86, 0.4), 20, 0.3, 0, 0);
 }
 
+.button:pressed {
+    -fx-scale-x: 95%;
+    -fx-scale-y: 95%;
+}
+
+
 .secondary-button {
-    -fx-background-color: #2a2a3a;
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 16px;
-    -fx-padding: 12px 24px;
-    -fx-border-radius: 12px;
-    -fx-background-radius: 12px;
-    -fx-effect: dropshadow(gaussian, #ffffff, 5, 0, 0, 0);
+    -fx-background-color: rgba(252, 80, 80, 0.1);
+    -fx-text-fill: rgba(252, 80, 80, 0.9);
+    -fx-border-color: rgba(252, 80, 80, 0.3);
+    -fx-background-radius: 21px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 21px;
     -fx-cursor: hand;
+    -fx-font-size: 16px;
+    -fx-font-family: "Roboto", "Segoe UI", sans-serif;
+    -fx-padding: 8 20;
 }
 
 .secondary-button:hover {
-    -fx-background-color: #333344;
-    -fx-effect: dropshadow(gaussian, #ffffff, 8, 0, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(252, 80, 80, 0.3), 40, 0.3, 0, 0);
 }
 
 .form-input .combo-box-popup .list-view {

@@ -6,6 +6,8 @@ import den_n.financeaccount.module.Account;
 
 import den_n.financeaccount.pages.AddAccount.AddAccountController;
 import den_n.financeaccount.pages.AddCategory.AddCategoryController;
+import den_n.financeaccount.pages.accountInfo.AccountInfoController;
+import den_n.financeaccount.pages.newTransaction.NewTransactionController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,7 +33,11 @@ public class MainController {
     private Stage addCategoryStage;
     private Stage newTransactionStage;
     private Stage addAccountStage;
+    private Stage connectionSettingsStage;
+    private Stage accoutInfo_stage;
     private AddCategoryController addCategoryController;
+    private NewTransactionController newTransactionController;
+    private AccountInfoController accountInfoController;
 
     private DAO<Account> accountDAO;
 
@@ -39,11 +45,15 @@ public class MainController {
         System.out.println("UI initialized!");
     }
 
-    public void putProperties(SessionFactory sessionFactory, Stage addCategoryStage, AddCategoryController addCategoryController, Stage newTransactionStage) {
+    public void putProperties(SessionFactory sessionFactory, Stage addCategoryStage, AddCategoryController addCategoryController, Stage newTransactionStage, Stage connectionSettingsStage, Stage accoutInfo_stage, NewTransactionController newTransactionController, AccountInfoController accountInfoController) {
         this.sessionFactory = sessionFactory;
         this.addCategoryStage = addCategoryStage;
         this.addCategoryController = addCategoryController;
         this.newTransactionStage = newTransactionStage;
+        this.connectionSettingsStage = connectionSettingsStage;
+        this.accoutInfo_stage = accoutInfo_stage;
+        this.newTransactionController = newTransactionController;
+        this.accountInfoController = accountInfoController;
 
         accountDAO = new DAO<>(sessionFactory, Account.class);
 
@@ -54,7 +64,7 @@ public class MainController {
         accountListView.setCellFactory(param -> {
 
             AccountListCell accountListCell = new AccountListCell();
-            accountListCell.putProperties(sessionFactory);
+            accountListCell.putProperties(sessionFactory, accoutInfo_stage, accountInfoController);
             return accountListCell;
         });
     }
@@ -112,5 +122,13 @@ public class MainController {
     public void newTransactionBtnClick(ActionEvent actionEvent) {
         System.out.println("Add transaction clicked");
         newTransactionStage.show();
+        newTransactionController.reloadData();
+
+    }
+
+    @FXML
+    private void connectionSettingsClick(ActionEvent actionEvent) {
+        System.out.println("Connection Settings clicked");
+        connectionSettingsStage.show();
     }
 }

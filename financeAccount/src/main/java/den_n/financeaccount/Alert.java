@@ -12,6 +12,8 @@ public class Alert {
         alert.setTitle("ERROR");
         alert.setHeaderText(title);
         alert.setContentText(content);
+        alert.setWidth(400);
+        alert.setResizable(true);
         alert.initModality(Modality.APPLICATION_MODAL);
         DialogPane dialogPane = alert.getDialogPane();
 

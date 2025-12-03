@@ -44,3 +44,8 @@
     -fx-margin: 0 10;
 }
 
+.alert-error .button:hover,
+.alert-information .button:hover,
+.alert-confirmation .button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(252, 80, 80, 0.3), 40, 0.3, 0, 0);
+}

@@ -58,4 +58,18 @@ public class DAO<T> {
         transaction.commit();
         session.close();
     }
+
+    public void update(T entity) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+            session.merge(entity);
+            transaction.commit();
+        }  catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Failed to update entity", e);
+        }
+    }
 }

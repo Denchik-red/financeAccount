@@ -29,7 +29,7 @@
          </padding>
         </Button>
 
-        <Region HBox.hgrow="ALWAYS" />
+            <Region HBox.hgrow="ALWAYS" />
 
         <Button onAction="#closeClick" styleClass="close-btn">
             <graphic>

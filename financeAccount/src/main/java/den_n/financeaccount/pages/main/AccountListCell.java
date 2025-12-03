@@ -3,6 +3,7 @@ package den_n.financeaccount.pages.main;
 import den_n.financeaccount.DAO;
 import den_n.financeaccount.module.Account;
 import den_n.financeaccount.module.Transaction;
+import den_n.financeaccount.pages.accountInfo.AccountInfoController;
 import javafx.geometry.Insets;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.Button;
@@ -10,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Priority;
+import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -17,6 +19,9 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 public class AccountListCell extends ListCell<Account> {
+
+    private Stage accoutInfo_stage;
+    private AccountInfoController accountInfoController;
 
     private final HBox card;
     private final VBox leftBox;
@@ -52,6 +57,8 @@ public class AccountListCell extends ListCell<Account> {
             Account account = getItem();
             if (account != null) {
                 System.out.println("Monthly clicked for: " + account.getName());
+                accountInfoController.putProperties(sessionFactory, account);
+                accoutInfo_stage.show();
             }
         });
     }
@@ -98,7 +105,9 @@ public class AccountListCell extends ListCell<Account> {
         }
     }
 
-    public void putProperties(SessionFactory sessionFactory) {
+    public void putProperties(SessionFactory sessionFactory, Stage accoutInfo_stage, AccountInfoController accountInfoController) {
         this.sessionFactory = sessionFactory;
+        this.accoutInfo_stage = accoutInfo_stage;
+        this.accountInfoController = accountInfoController;
     }
 }

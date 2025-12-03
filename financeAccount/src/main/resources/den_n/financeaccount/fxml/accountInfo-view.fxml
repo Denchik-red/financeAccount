@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.layout.Region?>
+
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<VBox styleClass="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="den_n.financeaccount.pages.accountInfo.AccountInfoController"
+      spacing="15.0">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <HBox>
+        <!-- Название счёта -->
+        <Label styleClass="nameTitle" fx:id="accountNameLabel" text="Счёт: ">
+            <VBox.margin>
+                <Insets bottom="5"/>
+            </VBox.margin>
+        </Label>
+
+        <Region HBox.hgrow="ALWAYS" />
+
+        <Button fx:id="renameButton" text="Переименовать счёт"
+                styleClass="renameButton"
+                onAction="#onRenameButtonClicked">
+            <VBox.margin>
+                <Insets bottom="15"/>
+            </VBox.margin>
+        </Button>
+    </HBox>
+    <!-- Баланс -->
+<!--     0.00 ₽-->
+    <Label styleClass="balanceTitle" fx:id="balanceLabel" text="Баланс:">
+        <VBox.margin>
+            <Insets bottom="15"/>
+        </VBox.margin>
+    </Label>
+
+    <!-- Диаграмма трат (placeholder) -->
+    <HBox fx:id="chartPane" prefHeight="200.0" style="-fx-border-color: gray; -fx-border-width: 1;">
+
+        <PieChart fx:id="pieChart" title="Расходы по категориям" prefHeight="200.0" style="-fx-border-color: gray; -fx-border-width: 1;"/>
+        <BarChart fx:id="barChart" title="Расходы по дням">
+            <xAxis>
+                <CategoryAxis fx:id="xAxis" label="Дата" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="yAxis" label="Сумма (₽)" />
+            </yAxis>
+        </BarChart>
+    </HBox>
+
+    <!-- Список транзакций -->
+    <ListView styleClass="transactionsListView" fx:id="transactionsListView" VBox.vgrow="ALWAYS" prefHeight="300.0">
+
+    </ListView>
+
+</VBox>

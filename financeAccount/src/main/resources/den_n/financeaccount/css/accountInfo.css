@@ -1,0 +1,171 @@
+.root {
+    -fx-background-image: url("../image/background.png");
+    -fx-background-color: #040411;
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-font-family: "Roboto";
+}
+
+.nameTitle {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20px;
+}
+
+.balanceTitle {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20px;
+}
+
+/* Убираем ВЕРТИКАЛЬНЫЙ scrollbar у ListView */
+.transactionsListView .scroll-bar:vertical {
+    -fx-pref-width: 0;
+    -fx-opacity: 0;
+}
+
+/* Убираем ГОРИЗОНТАЛЬНЫЙ scrollbar (если есть) */
+.transactionsListView .scroll-bar:horizontal {
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}
+
+.transactionsListView {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.transaction-cell {
+    -fx-background-color: #1e1e2a;
+    -fx-border-color: #2d2d3a;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.1), 5, 0, 0, 0);
+    -fx-alignment: center-left;
+}
+
+.transaction-cell:selected {
+    -fx-background-color: #2d2d3a;
+    -fx-border-color: #00ffff;
+    -fx-effect: dropshadow(gaussian, #00ffff, 8, 0, 0, 0);
+}
+
+.transaction-cell .label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: "Roboto";
+}
+
+.transaction-cell .label.amount {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Опционально: цвета доходов/расходов */
+.transaction-cell .income {
+    -fx-text-fill: #4cff66; /* Зелёный для дохода */
+}
+
+.transaction-cell .expense {
+    -fx-text-fill: #ff4c66; /* Красный для расхода */
+}
+
+/* Общие настройки для всех чартов */
+.chart {
+    -fx-background-color: transparent;
+}
+
+/* Фон диаграмм — прозрачный, чтобы соответствовать фону */
+.pie-chart, .bar-chart, .line-chart {
+    -fx-background-color: transparent;
+}
+
+/* Цвет заголовков диаграмм */
+.chart-title {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: "Roboto";
+}
+
+/* Цвет подписей осей (для BarChart и LineChart) */
+.axis-label {
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-family: "Roboto";
+}
+
+/* Цвет меток на осях (цифры/категории) */
+.axis .tick-mark,
+.axis .axis-tick-mark,
+.axis .minor-tick {
+    -fx-stroke: #888888;
+}
+
+.axis .tick-label {
+    -fx-fill: #cccccc;
+    -fx-font-size: 11px;
+    -fx-font-family: "Roboto";
+}
+
+/* PieChart: цвет легенды и сегментов */
+.pie-chart .chart-legend {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.pie-chart .chart-legend-item {
+    -fx-text-fill: white;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 12px;
+}
+
+.pie-chart .chart-pie {
+    -fx-stroke: transparent;
+}
+
+.bar-chart .default-color0.chart-bar {
+    -fx-bar-fill: #4cff66; /* Пример цвета — доход */
+}
+
+.bar-chart .default-color1.chart-bar {
+    -fx-bar-fill: #ff4c66; /* Пример цвета — расход */
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: #2d2d3a;
+}
+
+.chart-horizontal-grid-lines {
+    -fx-stroke: #2d2d3a;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.renameButton {
+    -fx-background-color: #2d2d3a;
+    -fx-text-fill: white;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 14px;
+    -fx-padding: 8 16 8 16;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.2), 4, 0, 0, 0);
+    -fx-cursor: hand;
+}
+
+.renameButton:hover {
+    -fx-background-color: #3a3a4a;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.4), 6, 0, 0, 0);
+}
+
+.renameButton:pressed {
+    -fx-background-color: #252535;
+}

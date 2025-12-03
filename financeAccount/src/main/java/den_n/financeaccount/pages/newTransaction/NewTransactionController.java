@@ -1,5 +1,6 @@
 package den_n.financeaccount.pages.newTransaction;
 
+import den_n.financeaccount.Alert;
 import den_n.financeaccount.DAO;
 import den_n.financeaccount.module.Account;
 import den_n.financeaccount.module.Category;
@@ -44,11 +45,24 @@ public class NewTransactionController {
         accountDAO = new DAO<>(sessionFactory, Account.class);
         transactionDAO = new DAO<>(sessionFactory, Transaction.class);
 
+        reloadData();
+    }
+
+
+    public void reloadData() {
+        amountField.setText("");
+        accountCombo.getItems().clear();
+        accountCombo.getSelectionModel().clearSelection();
+        categoryCombo.getItems().clear();
+        categoryCombo.getSelectionModel().clearSelection();
+
         List<Account> accounts = accountDAO.findAll();
         List<Category> categories = categoryDAO.findAll();
 
         accountCombo.getItems().addAll(accounts);
         categoryCombo.getItems().addAll(categories);
+
+
     }
 
     @FXML
@@ -58,6 +72,9 @@ public class NewTransactionController {
             LocalDateTime ldt = LocalDateTime.of(datePicker.getValue(), LocalTime.now());
             Account account = accountCombo.getValue();
             Category category = categoryCombo.getValue();
+            if (account == null || category == null) {
+                throw new Exception();
+            }
 
 
             transactionDAO.save(new Transaction(account, category, amount, ldt));
@@ -67,11 +84,7 @@ public class NewTransactionController {
             stage.close();
 
         } catch (Exception e) {
-            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Invalid Input");
-            alert.setContentText("Please check your input and try again.");
-            alert.showAndWait();
+            Alert.ErrorAlert("Error", "fill in the form");
         }
     }
 

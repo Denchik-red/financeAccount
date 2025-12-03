@@ -21,6 +21,10 @@
          <HBox.margin>
             <Insets left="15.0" right="15.0" />
          </HBox.margin></Button>
+        <Button onAction="#connectionSettingsClick" styleClass="header-btn" text="Connection Settings">
+            <HBox.margin>
+                <Insets left="15.0" right="15.0" />
+            </HBox.margin></Button>
     </HBox>
     <HBox alignment="TOP_LEFT" styleClass="myAccountsTitle">
         <Label styleClass="myAccountsLabel" text="Total Balance">

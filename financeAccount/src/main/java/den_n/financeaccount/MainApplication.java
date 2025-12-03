@@ -2,14 +2,19 @@ package den_n.financeaccount;
 
 import den_n.financeaccount.pages.AddCategory.AddCategoryController;
 import den_n.financeaccount.pages.AddCategory.AddCategoryDialogController;
+import den_n.financeaccount.pages.accountInfo.AccountInfoController;
+import den_n.financeaccount.pages.connecrionSettings.ConnectionSettingsController;
 import den_n.financeaccount.pages.newTransaction.NewTransactionController;
 import den_n.financeaccount.pages.main.MainController;
+import den_n.financeaccount.util.ConnectionPreferences;
+import den_n.financeaccount.util.DatabaseConfigUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.Transaction;
 
 
 import java.io.IOException;
@@ -20,10 +25,67 @@ public class MainApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+
+        //окно настроек подключения
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/den_n/financeaccount/fxml/connectionSettings-view.fxml"));
+        Scene content = new Scene(fxmlLoader.load());
+        ConnectionSettingsController connectionSettingsController = fxmlLoader.getController();
+        content.getStylesheets().add(getClass().getResource("/den_n/financeaccount/css/connectionSettings.css").toExternalForm());
+        Stage connectionSettingsStage = new Stage();
+        connectionSettingsStage.setTitle("Connection Settings");
+        connectionSettingsStage.setMinWidth(450);
+        connectionSettingsStage.setMinHeight(680);
+        connectionSettingsStage.setScene(content);
+
         try {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
+            Class.forName("org.postgresql.Driver");
+            String url = "jdbc:postgresql://" + ConnectionPreferences.getHost() + ":" + ConnectionPreferences.getPort() + "/" + ConnectionPreferences.getDatabase();
+            java.sql.Connection conn = java.sql.DriverManager.getConnection(url, ConnectionPreferences.getUsername(), ConnectionPreferences.getPassword());
+            conn.close();
         } catch (Exception e) {
-            System.out.println("connection to the database failed"); //message
+            Alert.ErrorAlert("Connection Failed", "Could not connect to database: " + e.getMessage());
+            connectionSettingsStage.showAndWait();
+            System.exit(0);
+        }
+
+        try {
+            sessionFactory = DatabaseConfigUtil.createSessionFactory();
+        } catch (Exception e) {
+            System.out.println("connection to the database failed: " + e.getMessage());
+            Alert.ErrorAlert("Connection to database failed", e.getMessage());
+        }
+
+        try(Session session = sessionFactory.openSession()) {
+            String createFunctionSql = """
+        CREATE OR REPLACE FUNCTION getTransactionsMonthly(
+            p_account_name VARCHAR,
+            p_start_date DATE,
+            p_end_date DATE
+        )
+        RETURNS TABLE (
+            date DATE,
+            amount NUMERIC(19, 2)
+        ) AS $$
+        BEGIN
+            RETURN QUERY
+            SELECT 
+                CAST(t.created_at AS DATE),
+                SUM(t.amount)
+            FROM transactions t
+            JOIN accounts a ON t.account_id = a.id
+            WHERE a.name = p_account_name
+              AND CAST(t.created_at AS DATE) BETWEEN p_start_date AND p_end_date
+            GROUP BY CAST(t.created_at AS DATE)
+            ORDER BY CAST(t.created_at AS DATE);
+        END;
+        $$ LANGUAGE plpgsql;
+        """;
+            Transaction transaction = session.beginTransaction();
+            session.createNativeQuery(createFunctionSql).executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("init database structure failed: " + e.getMessage());
+            Alert.ErrorAlert("Init database structure failed", e.getMessage());
         }
 
         // Главное окно приложения main-view
@@ -37,6 +99,11 @@ public class MainApplication extends Application {
         stage.setHeight(600);
         stage.setTitle("Hello!");
         stage.setScene(main_scene);
+        stage.setOnCloseRequest(evt -> {
+            if (Alert.ConfirmAlert("Close app")) {
+                stage.close();
+            }
+        });
         stage.show();
 
         // Окно просмотра категорий addCategory-view
@@ -78,8 +145,24 @@ public class MainApplication extends Application {
         newTransactionStage.initOwner(stage);
 //        newTransactionStage.show();
 
+        // Окно меню транзакции
+        FXMLLoader accauntInfo_fxmlLoader = new FXMLLoader(getClass().getResource("/den_n/financeaccount/fxml/accountInfo-view.fxml"));
+        Scene accountInfo_scene = new Scene(accauntInfo_fxmlLoader.load());
+        AccountInfoController accountInfoController = accauntInfo_fxmlLoader.getController();
+        accountInfo_scene.getStylesheets().add(getClass().getResource("/den_n/financeaccount/css/accountInfo.css").toExternalForm());
+        Stage accoutInfo_stage = new Stage();
+        accoutInfo_stage.setTitle("Счет");
+        accoutInfo_stage.setMinWidth(500);
+        accoutInfo_stage.setMinHeight(635);
+        accoutInfo_stage.setScene(accountInfo_scene);
+        accoutInfo_stage.initOwner(stage);
+//        accaoutInfo_stage.show();
+
+
+
+
         //передача переменных окнам
-        mainController.putProperties(sessionFactory, addCategoryStage, addCategoryController, newTransactionStage);
+        mainController.putProperties(sessionFactory, addCategoryStage, addCategoryController, newTransactionStage, connectionSettingsStage, accoutInfo_stage, newTransactionController, accountInfoController);
         addCategoryController.putProperties(sessionFactory, addCategoryDialogStage);
         addCategoryDialogController.putProperties(sessionFactory, addCategoryController);
         newTransactionController.putProperties(sessionFactory);
