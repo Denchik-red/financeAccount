@@ -18,7 +18,7 @@
         <TextField fx:id="accountNameField" promptText="Enter the account name" />
     </VBox>
     <HBox alignment="CENTER">
-        <Button mnemonicParsing="false" onAction="#saveAccountBtnClick" styleClass="add-category-btn" text="Save" />
+        <Button mnemonicParsing="false" fx:id="saveAccountBtn" onAction="#saveAccountBtnClick" styleClass="add-category-btn" text="Save" />
         <Region HBox.hgrow="ALWAYS" />
         <Button mnemonicParsing="false" onAction="#closeBtnClick" styleClass="close-btn" text="Close" />
         <padding>

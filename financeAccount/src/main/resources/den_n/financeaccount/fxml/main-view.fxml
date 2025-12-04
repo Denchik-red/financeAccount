@@ -17,11 +17,11 @@
         </ImageView>
         <Label styleClass="logo-text">Finance accounting</Label>
         <Region HBox.hgrow="ALWAYS" />
-        <Button onAction="#newTransactionBtnClick" styleClass="header-btn" text="New Transaction">
+        <Button fx:id="newTransaction" onAction="#newTransactionBtnClick" styleClass="header-btn" text="New Transaction">
          <HBox.margin>
             <Insets left="15.0" right="15.0" />
          </HBox.margin></Button>
-        <Button onAction="#connectionSettingsClick" styleClass="header-btn" text="Connection Settings">
+        <Button fx:id="connectionSettings" onAction="#connectionSettingsClick" styleClass="header-btn" text="Connection Settings">
             <HBox.margin>
                 <Insets left="15.0" right="15.0" />
             </HBox.margin></Button>
@@ -42,7 +42,7 @@
     <!-- footer -->
     <HBox alignment="CENTER_LEFT" spacing="20" styleClass="footer-panel">
         <!-- Кнопки слева -->
-        <Button onAction="#addAccountClick" styleClass="footer-btn">
+        <Button fx:id="addAccount" onAction="#addAccountClick" styleClass="footer-btn">
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35">
                     <Image url="@../image/plus.png" />
@@ -53,7 +53,7 @@
 
         <Label styleClass="divider" text="|" />
 
-        <Button onAction="#addCategoryClick" styleClass="footer-btn">
+        <Button fx:id="addCategory" onAction="#addCategoryClick" styleClass="footer-btn">
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35">
                     <Image url="@../image/plus.png" />

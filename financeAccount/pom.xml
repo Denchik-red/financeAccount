@@ -61,6 +61,31 @@
             <version>5.12.1</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- TestFX Core -->
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-core</artifactId>
+            <version>4.0.17</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- TestFX JUnit5 (тут определён ApplicationExtension) -->
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-junit5</artifactId>
+            <version>4.0.17</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Для работы JavaFX внутри тестов (опционально, но часто нужно) -->
+<!--        <dependency>-->
+<!--            <groupId>org.testfx</groupId>-->
+<!--            <artifactId>openjfx-monocle</artifactId>-->
+<!--            <version>8u76-b04</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+
     </dependencies>
 
     <build>

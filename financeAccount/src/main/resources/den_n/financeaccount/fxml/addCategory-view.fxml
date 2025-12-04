@@ -17,7 +17,7 @@
          <Insets bottom="30.0" left="20.0" right="20.0" top="20.0" />
       </VBox.margin></ListView>
     <HBox>
-        <Button onAction="#addCategoryClick" styleClass="add-category-btn">
+        <Button fx:id="addNewCategory" onAction="#addCategoryClick" styleClass="add-category-btn">
             <graphic>
                 <ImageView fitHeight="35" fitWidth="35">
                     <Image url="@../image/plus_green.png" />
