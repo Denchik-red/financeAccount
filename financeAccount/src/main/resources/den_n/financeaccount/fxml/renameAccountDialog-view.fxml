@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" styleClass="root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="den_n.financeaccount.pages.renameAccountDialog.RenameAccountDialogController">
+<VBox alignment="TOP_CENTER" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="den_n.financeaccount.pages.renameAccountDialog.RenameAccountDialogController">
     <HBox alignment="TOP_LEFT">
         <Label styleClass="title-label" text="Переименовать счет" />
     </HBox>

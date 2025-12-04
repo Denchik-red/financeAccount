@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" styleClass="root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="den_n.financeaccount.pages.AddCategory.AddCategoryController">
+<VBox alignment="TOP_CENTER" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="den_n.financeaccount.pages.AddCategory.AddCategoryController">
     <Label styleClass="title-label" text="Categories" />
     <ListView fx:id="categoryListView">
       <VBox.margin>

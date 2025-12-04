@@ -1,5 +1,6 @@
 package den_n.financeaccount.pages.renameAccountDialog;
 
+import den_n.financeaccount.Alert;
 import den_n.financeaccount.DAO;
 import den_n.financeaccount.module.Account;
 import den_n.financeaccount.pages.accountInfo.AccountInfoController;
@@ -20,6 +21,11 @@ public class RenameAccountDialogController {
     private DAO<Account> accountDAO;
 
     public void saveCategoryBtnClick(ActionEvent actionEvent) {
+
+        if (categoryNameField.getText().isBlank()) {
+            Alert.InfoAlert("Name can not be empty");
+            return;
+        }
 
         account.setName(categoryNameField.getText());
         accountDAO.update(account);

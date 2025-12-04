@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" styleClass="root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="den_n.financeaccount.pages.AddAccount.AddAccountController">
+<VBox alignment="TOP_CENTER" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="den_n.financeaccount.pages.AddAccount.AddAccountController">
     <HBox alignment="TOP_LEFT">
         <Label styleClass="title-label" text="New Account" />
     </HBox>
