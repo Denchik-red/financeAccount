@@ -2,8 +2,10 @@ package den_n.financeaccount.pages.accountInfo;
 
 import den_n.financeaccount.Alert;
 import den_n.financeaccount.DAO;
+import den_n.financeaccount.MainApplication;
 import den_n.financeaccount.module.Account;
 import den_n.financeaccount.module.Transaction;
+import den_n.financeaccount.pages.main.MainController;
 import den_n.financeaccount.pages.renameAccountDialog.RenameAccountDialogController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,12 +46,14 @@ public class AccountInfoController {
 
     private SessionFactory sessionFactory;
     private Account account;
+    private MainController mainController;
 
     private DAO<Transaction> transactionDAO;
 
-    public void putProperties(SessionFactory sessionFactory, Account account) {
+    public void putProperties(SessionFactory sessionFactory, Account account, MainController mainController) {
         this.sessionFactory = sessionFactory;
         this.account = account;
+        this.mainController = mainController;
 
         this.transactionDAO = new DAO<>(sessionFactory, Transaction.class);
 
@@ -168,5 +172,22 @@ public class AccountInfoController {
             System.out.println(e.getMessage());
             Alert.ErrorAlert("Erorr", e.getMessage());
         }
+    }
+
+    public void deleteBtnClick(ActionEvent actionEvent) {
+        DAO<Account> accountDAO = new DAO<>(sessionFactory, Account.class);
+        accountDAO.delete(account);
+
+        Node node = (Node) actionEvent.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
+
+        mainController.reloadClick(new ActionEvent());
+    }
+
+    public void closeBtnClick(ActionEvent actionEvent) {
+        Node node = (Node) actionEvent.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
     }
 }

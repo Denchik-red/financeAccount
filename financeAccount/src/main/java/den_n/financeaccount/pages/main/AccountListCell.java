@@ -29,6 +29,8 @@ public class AccountListCell extends ListCell<Account> {
     private final Label balanceLabel;
     private final Button monthlyButton;
 
+    private MainController mainController;
+
     private SessionFactory sessionFactory;
 
     public AccountListCell() {
@@ -57,7 +59,7 @@ public class AccountListCell extends ListCell<Account> {
             Account account = getItem();
             if (account != null) {
                 System.out.println("Monthly clicked for: " + account.getName());
-                accountInfoController.putProperties(sessionFactory, account);
+                accountInfoController.putProperties(sessionFactory, account, mainController);
                 accoutInfo_stage.show();
             }
         });
@@ -105,9 +107,10 @@ public class AccountListCell extends ListCell<Account> {
         }
     }
 
-    public void putProperties(SessionFactory sessionFactory, Stage accoutInfo_stage, AccountInfoController accountInfoController) {
+    public void putProperties(SessionFactory sessionFactory, Stage accoutInfo_stage, AccountInfoController accountInfoController, MainController mainController) {
         this.sessionFactory = sessionFactory;
         this.accoutInfo_stage = accoutInfo_stage;
         this.accountInfoController = accountInfoController;
+        this.mainController = mainController;
     }
 }

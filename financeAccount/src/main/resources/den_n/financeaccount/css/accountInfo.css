@@ -169,3 +169,44 @@
 .renameButton:pressed {
     -fx-background-color: #252535;
 }
+
+.root .button:pressed {
+    -fx-scale-x: 95%;
+    -fx-scale-y: 95%;
+}
+
+.close-btn {
+    -fx-background-color: rgba(252, 80, 80, 0.1);
+    -fx-text-fill: rgba(252, 80, 80, 0.9);
+    -fx-border-color: rgba(252, 80, 80, 0.3);
+    -fx-background-radius: 21px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 21px;
+    -fx-cursor: hand;
+    -fx-font-size: 16px;
+    -fx-font-family: "Roboto", "Segoe UI", sans-serif;
+    -fx-padding: 8 20;
+    -fx-margin: 0 10;
+}
+
+.close-btn:hover {
+    -fx-effect: dropshadow(gaussian, rgba(252, 80, 80, 0.3), 40, 0.3, 0, 0);
+}
+
+.delete-btn {
+    -fx-background-color: rgba(252, 80, 80, 0.1);
+    -fx-text-fill: rgba(252, 80, 80, 0.9);
+    -fx-border-color: rgba(252, 80, 80, 0.3);
+    -fx-background-radius: 21px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 21px;
+    -fx-cursor: hand;
+    -fx-font-size: 16px;
+    -fx-font-family: "Roboto", "Segoe UI", sans-serif;
+    -fx-padding: 8 20;
+    -fx-margin: 0 10;
+}
+
+.delete-btn:hover {
+    -fx-effect: dropshadow(gaussian, rgba(252, 80, 80, 0.3), 40, 0.3, 0, 0);
+}

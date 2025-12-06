@@ -2,14 +2,17 @@ package den_n.financeaccount.pages.newTransaction;
 
 import den_n.financeaccount.Alert;
 import den_n.financeaccount.DAO;
+import den_n.financeaccount.MainApplication;
 import den_n.financeaccount.module.Account;
 import den_n.financeaccount.module.Category;
 import den_n.financeaccount.module.Transaction;
+import den_n.financeaccount.pages.main.MainController;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.math.BigDecimal;
@@ -26,6 +29,7 @@ public class NewTransactionController {
     private DAO<Account> accountDAO;
     private DAO<Transaction> transactionDAO;
 
+    private MainController mainController;
 
 
     @FXML private TextField amountField;
@@ -39,8 +43,9 @@ public class NewTransactionController {
         datePicker.setValue(LocalDate.now());
     }
 
-    public void putProperties(SessionFactory sessionFactory) {
+    public void putProperties(SessionFactory sessionFactory, MainController mainController) {
         this.sessionFactory = sessionFactory;
+        this.mainController = mainController;
 
         categoryDAO = new DAO<>(sessionFactory, Category.class);
         accountDAO = new DAO<>(sessionFactory, Account.class);
@@ -76,10 +81,15 @@ public class NewTransactionController {
             if (account == null || category == null) {
                 throw new Exception();
             }
+            if ((getBalanceForAccount(account).add(amount)).compareTo(BigDecimal.ZERO)  < 0) {
+                Alert.ErrorAlert("Error", "there are insufficient funds in the account");
+                return;
+            }
 
 
             transactionDAO.save(new Transaction(account, category, amount, ldt));
 
+            mainController.reloadClick(new ActionEvent());
             Node node = (Node) actionEvent.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
             stage.close();
@@ -107,6 +117,22 @@ public class NewTransactionController {
         Node node = (Node) actionEvent.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         stage.close();
+    }
+
+    public BigDecimal getBalanceForAccount(Account account) {
+        try (Session session = sessionFactory.openSession()) {
+
+            BigDecimal sum = session.createQuery(
+                            "SELECT SUM(t.amount) FROM Transaction t WHERE t.account.id = :accountId",
+                            BigDecimal.class
+                    )
+                    .setParameter("accountId", account.getId())
+                    .uniqueResult();
+
+            return sum != null ? sum : BigDecimal.ZERO;
+        }  catch (Exception e) {
+            throw new RuntimeException("Failed to get entities", e);
+        }
     }
 
 }

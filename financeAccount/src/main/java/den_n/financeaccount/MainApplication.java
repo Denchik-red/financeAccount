@@ -210,7 +210,7 @@ public class MainApplication extends Application {
         mainController.putProperties(sessionFactory, addCategoryStage, addCategoryController, newTransactionStage, connectionSettingsStage, accoutInfo_stage, newTransactionController, accountInfoController);
         addCategoryController.putProperties(sessionFactory, addCategoryDialogStage);
         addCategoryDialogController.putProperties(sessionFactory, addCategoryController);
-        newTransactionController.putProperties(sessionFactory);
+        newTransactionController.putProperties(sessionFactory, mainController);
 
     }
 }

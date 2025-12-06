@@ -64,7 +64,7 @@ public class MainController {
         accountListView.setCellFactory(param -> {
 
             AccountListCell accountListCell = new AccountListCell();
-            accountListCell.putProperties(sessionFactory, accoutInfo_stage, accountInfoController);
+            accountListCell.putProperties(sessionFactory, accoutInfo_stage, accountInfoController, this);
             return accountListCell;
         });
     }
