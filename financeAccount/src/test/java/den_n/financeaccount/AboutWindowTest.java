@@ -77,7 +77,6 @@ public class AboutWindowTest {
         robot.sleep(500);
         String value = robot.lookup("#categoryNameField").queryTextInputControl().getText();
         assertEquals("TestCategory", value);
-
     }
 
     @Test

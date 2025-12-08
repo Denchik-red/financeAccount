@@ -115,8 +115,8 @@
 
 /* PieChart: цвет легенды и сегментов */
 .pie-chart .chart-legend {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
+    -fx-background-color: white;
+    -fx-border-color: white;
 }
 
 .pie-chart .chart-legend-item {
@@ -130,11 +130,11 @@
 }
 
 .bar-chart .default-color0.chart-bar {
-    -fx-bar-fill: #4cff66; /* Пример цвета — доход */
+    -fx-bar-fill: #4cff66;
 }
 
 .bar-chart .default-color1.chart-bar {
-    -fx-bar-fill: #ff4c66; /* Пример цвета — расход */
+    -fx-bar-fill: #ff4c66;
 }
 
 .chart-vertical-grid-lines {
